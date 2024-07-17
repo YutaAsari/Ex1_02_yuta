@@ -4,8 +4,8 @@
 // 頂点構造体
 struct SimpleVertex
 {
-    float pos[3];       // 頂点座標
-    float color[3];     // 頂点カラー
+    float pos[4];       // 頂点座標
+    float color[4];     // 頂点カラー
 };
 
 // 関数宣言
@@ -41,16 +41,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // 頂点配列を定義
     SimpleVertex vertices[] = {
         {
-            {-0.5f, -0.5f, 0.0f},
-            { 1.0f, 0.0f, 0.0f }
+            { -0.5f, -0.5f, 0.0f, 0.5f},
+            { 1.0f, 0.0f, 0.0f, 0.0f }
         },
         {
-            { 0.0f, 0.5f, 0.0f },
-            { 0.0f, 1.0f, 0.0f }
+            { 0.5f, 0.5f, 0.0f, 0.0f },
+            { 0.0f, 1.0f, 0.0f, 0.0f }
         },
         {
-            { 0.5f, -0.5f, 0.0f },
-            { 0.0f, 0.0f, 1.0f }
+            { 0.5f, -0.5f, 0.0f, 0.5f },
+            { 0.0f, 0.0f, 1.0f, 0.0f }
+        },
+        {
+            { -0.5f, 0.5f, 0.0f, 0.5f},
+            { 0.0f, 0.0f, 0.0f, 1.0f }
         }
     };
 
@@ -61,7 +65,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // 5. 三角形のインデックスバッファを作成
     //インデックス配列
     uint16_t indices[] = {
-        0,1,2
+        0,1,2,
+        3,1,0
     };
     IndexBuffer triangleIB;
     triangleIB.Init(sizeof(indices), 2);
@@ -93,7 +98,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         // 5. インデックスバッファを設定
         renderContext.SetIndexBuffer(triangleIB);
         // 6. ドローコール
-        renderContext.DrawIndexed(3);
+        //renderContext.DrawIndexed(3);
+        renderContext.DrawIndexed(6);
 
         /// //////////////////////////////////////
         // 絵を描くコードを書くのはここまで！！！
